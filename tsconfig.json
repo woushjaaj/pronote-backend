@@ -1,0 +1,14 @@
+// tsconfig.json
+{
+  "compilerOptions": {
+    "target": "ES2020",           // version de JavaScript cible
+    "module": "commonjs",         // format des modules (requis pour Node.js)
+    "outDir": "./dist",           // dossier de sortie après compilation
+    "rootDir": "./src",           // dossier source
+    "strict": true,               // active toutes les vérifications de type
+    "esModuleInterop": true,      // améliore la compatibilité des imports
+    "skipLibCheck": true          // ignore les erreurs dans node_modules
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}
