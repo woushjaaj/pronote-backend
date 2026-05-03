@@ -13,10 +13,8 @@ const router = express.Router();
 router.get('/timetable', async (req, res) => {
   try {
     const offset = parseInt(req.query.week as string || '0');
-    const result = await Pronote.fetchTimetable(offset);
-    // parseTimetable retourne un objet, on extrait le tableau
-    const slots = Array.isArray(result) ? result : (result as any)?.classes ?? (result as any)?.slots ?? Object.values(result ?? {}).find(v => Array.isArray(v)) ?? [];
-    res.json({ success: true, data: slots });
+    const slots = await Pronote.fetchTimetable(offset);
+    res.json({ success: true, data: Array.isArray(slots) ? slots : (slots as any)?.classes ?? [] });
   } catch (err) {
     res.status(500).json({ success: false, error: String(err) });
   }

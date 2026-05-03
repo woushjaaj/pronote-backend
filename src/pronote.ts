@@ -68,17 +68,17 @@ function getCurrentPeriod(s: Pawnote.SessionHandle): Pawnote.Period {
 // Emploi du temps
 export async function fetchTimetable(weekOffset = 0) {
   const s = await getSession();
-
   const now = new Date();
   const targetDate = new Date(now.getTime() + weekOffset * 7 * 24 * 60 * 60 * 1000);
   const weekNumber = Pawnote.translateToWeekNumber(targetDate, s.instance!.firstMonday);
-
   const raw = await Pawnote.timetableFromWeek(s, weekNumber);
   return Pawnote.parseTimetable(s, raw, {
     withCanceledClasses: true,
     withPlannedClasses: true,
     withSuperposedCanceledClasses: true,
   });
+  console.log('🗓️ TIMETABLE RAW:', JSON.stringify(raw).substring(0, 500));
+  return raw;
 }
 
 // Notes
